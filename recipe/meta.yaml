@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 9bfd9d984348120f9ed8524731eb639b029d9f55001b1f882485fd7ebf33f3a3
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script:
     - echo billiard > requirements.txt
@@ -20,10 +20,10 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
     - pytest-runner
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - billiard
     - pytest-runner
 test:
@@ -33,6 +33,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://pypi.org/project/godale/
